@@ -1,0 +1,13 @@
+version: '3.4'
+services: 
+  quote_mongo:
+    container_name: quote-mongo
+    image: mongo:latest
+    ports: 
+      - 3001:27017
+    volumes:
+      - quote-mongo:/data/db
+
+volumes:
+  quote-mongo:
+    name: quote-mongo
