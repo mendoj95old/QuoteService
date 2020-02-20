@@ -1,9 +1,11 @@
-import { Controller, Get, Param, Post, Body, Logger } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Logger, Delete, UseInterceptors } from '@nestjs/common';
 import { CreateQuoteDto } from './dto/create-quote-dto';
 import { Quote } from './interface/quote.interface';
 import { QuotesService } from './quotes.service';
+import { LoggerInterceptor } from 'src/libs/logger.interceptor';
 
-@Controller('quotes')
+@Controller('api/quotes')
+@UseInterceptors(LoggerInterceptor)
 export class QuotesController {
 
   constructor(
@@ -24,9 +26,15 @@ export class QuotesController {
   }
 
   @Post()
-  create(@Body() createQuoteDto: CreateQuoteDto) {
+  async create(@Body() createQuoteDto: CreateQuoteDto): Promise<Quote> {
     this.logger.log(`Adding quote, ${JSON.stringify(createQuoteDto)}`);
-    this.quoteService.create(createQuoteDto);
+    return this.quoteService.create(createQuoteDto);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    this.logger.log(`Deleting quote, id=${id}`);
+    this.quoteService.deleteOne(id);
   }
 
 }
