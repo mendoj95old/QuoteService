@@ -2,10 +2,10 @@ import { Controller, Get, Param, Post, Body, Logger, Delete, UseInterceptors } f
 import { CreateQuoteDto } from './dto/create-quote-dto';
 import { Quote } from './interface/quote.interface';
 import { QuotesService } from './quotes.service';
-import { LoggerInterceptor } from 'src/libs/logger.interceptor';
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
 
+@ApiTags('quotes')
 @Controller('api/quotes')
-@UseInterceptors(LoggerInterceptor)
 export class QuotesController {
 
   constructor(
@@ -14,7 +14,8 @@ export class QuotesController {
   ) {}
 
   @Get()
-  async findAll(): Promise<Quote[]> {
+  @ApiResponse({ status: 200, description: ''})
+  async findAll() {
     this.logger.log(`Getting all quotes.`);
     return this.quoteService.findAll();
   }
