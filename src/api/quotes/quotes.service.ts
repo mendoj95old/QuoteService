@@ -12,7 +12,7 @@ export class QuotesService {
     private readonly quotesRepository: Repository<Quote>,
   ) {}
 
-  async findAll(): Promise<Quote[]> {
+  async findAll() {
     return this.quotesRepository.find();
   }
 
