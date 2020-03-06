@@ -78,4 +78,15 @@ describe('Quotes Controller', () => {
     });
   });
 
+  describe('update', () => {
+    it('should update a quote', async () => {
+      const result = testQuote;
+      const id = result.id.toHexString();
+
+      jest.spyOn(quotesService, 'update').mockResolvedValue(result);
+
+      expect(await quotesController.update(id, result)).toBe(result);
+    });
+  });
+
 });

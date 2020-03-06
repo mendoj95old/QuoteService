@@ -32,4 +32,10 @@ export class QuotesService {
     this.quotesRepository.delete(id);
   }
 
+  async update(id: string, quoteData: CreateQuoteDto): Promise<Quote> {
+    const toUpdate = await this.quotesRepository.findOne(id);
+    const updated = Object.assign(toUpdate, quoteData);
+    return this.quotesRepository.save(updated);
+  }
+
 }

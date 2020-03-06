@@ -71,4 +71,10 @@ describe('QuotesService', () => {
     });
   });
 
+  describe('update', () => {
+    it('should update quote in database by id', async () => {
+      expect(await quotesService.update(testQuote.id.toHexString(), testQuote)).toBe(testQuote);
+    });
+  });
+
 });

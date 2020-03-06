@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body, Logger, Delete } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Logger, Delete, Put } from '@nestjs/common';
 import { CreateQuoteDto } from './dto/create-quote-dto';
 import { Quote } from './interface/quote.interface';
 import { QuotesService } from './quotes.service';
@@ -36,6 +36,12 @@ export class QuotesController {
   delete(@Param('id') id: string) {
     this.logger.log(`Deleting quote, id=${id}`);
     this.quoteService.deleteOne(id);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: string, @Body() quote: CreateQuoteDto): Promise<Quote> {
+    this.logger.log(`Updating quote, id=${id}, newQuote="${JSON.stringify(quote)}`);
+    return this.quoteService.update(id, quote);
   }
 
 }
