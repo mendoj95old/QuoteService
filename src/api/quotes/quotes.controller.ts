@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body, Logger, Delete, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Logger, Delete } from '@nestjs/common';
 import { CreateQuoteDto } from './dto/create-quote-dto';
 import { Quote } from './interface/quote.interface';
 import { QuotesService } from './quotes.service';
