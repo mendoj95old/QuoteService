@@ -16,15 +16,19 @@ export class QuotesService {
     return this.quotesRepository.find();
   }
 
-  create(createQuoteDto: CreateQuoteDto): Promise<Quote> {
-    return this.quotesRepository.save(createQuoteDto);
+  async create(createQuoteDto: CreateQuoteDto): Promise<Quote> {
+    const quote = new Quote();
+    quote.author = createQuoteDto.author;
+    quote.quote = createQuoteDto.quote;
+
+    return this.quotesRepository.save(quote);
   }
 
-  findOne(id: string): Promise<Quote> {
+  async findOne(id: string): Promise<Quote> {
     return this.quotesRepository.findOne(id);
   }
 
-  deleteOne(id: string) {
+  async deleteOne(id: string) {
     this.quotesRepository.delete(id);
   }
 

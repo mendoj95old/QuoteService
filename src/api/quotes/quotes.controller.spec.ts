@@ -39,11 +39,7 @@ describe('Quotes Controller', () => {
   describe('getAll', () => {
     it('should return an array of quotes', async () => {
       const result: Quote[] = [
-        {
-          id: new ObjectId(),
-          quote: 'test1',
-          author: 'test1',
-        },
+        { id: new ObjectId(), quote: 'test1', author: 'test1' },
       ];
 
       jest.spyOn(quotesService, 'findAll').mockResolvedValue(result);
@@ -76,7 +72,7 @@ describe('Quotes Controller', () => {
     it('should delete a quote', async () => {
       const result = testQuote;
 
-      jest.spyOn(quotesService, 'deleteOne').mockImplementationOnce(() => result);
+      jest.spyOn(quotesService, 'deleteOne').mockImplementationOnce(() => null);
 
       expect(await quotesController.delete(result.id.toHexString())).toBe(undefined);
     });
