@@ -11,7 +11,9 @@ export class QuotesController {
   constructor(
     private readonly quoteService: QuotesService,
     private readonly logger: Logger,
-  ) {}
+  ) {
+    this.logger.setContext(QuotesController.name);
+  }
 
   @Get()
   @ApiResponse({ status: 200, description: ''})
@@ -33,13 +35,13 @@ export class QuotesController {
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string) {
+  async delete(@Param('id') id: string) {
     this.logger.log(`Deleting quote, id=${id}`);
     this.quoteService.deleteOne(id);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() quote: CreateQuoteDto): Promise<Quote> {
+  async update(@Param('id') id: string, @Body() quote: CreateQuoteDto): Promise<Quote> {
     this.logger.log(`Updating quote, id=${id}, newQuote="${JSON.stringify(quote)}`);
     return this.quoteService.update(id, quote);
   }

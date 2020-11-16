@@ -1,5 +1,6 @@
-import { Entity, ObjectIdColumn, ObjectID, Column } from 'typeorm';
+import { Entity, ObjectIdColumn, Column } from 'typeorm';
 import { ObjectId } from 'mongodb';
+import { SourceType } from './quote.enum';
 
 @Entity()
 export class Quote {
@@ -12,4 +13,13 @@ export class Quote {
 
   @Column()
   author: string;
+
+  @Column()
+  source: string;
+
+  @Column()
+  sourceType: SourceType;
+
+  @Column()
+  content: string;
 }
